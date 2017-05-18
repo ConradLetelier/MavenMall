@@ -23,8 +23,10 @@ import javax.persistence.OneToMany;
 public class Team implements Serializable{
     
     @Id@GeneratedValue
-    int id;
-    String name;
+    private int id;
+    private String name;
+    private String manager;
+    private double balance;
     @OneToMany(mappedBy = "team")
     @JsonBackReference
     List<Player> players;
@@ -33,9 +35,11 @@ public class Team implements Serializable{
         
     }
     
-    public Team(int id, String name) {
+    public Team(int id, String name, String manager, double balance) {
         this.id = id;
         this.name = name;
+        this.manager = manager;
+        this.balance = balance;
     }
 
     public int getId() {
@@ -53,6 +57,24 @@ public class Team implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+    
+    
 
     public List<Player> getPlayers() {
         return players;

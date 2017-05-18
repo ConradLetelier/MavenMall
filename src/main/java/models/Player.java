@@ -18,24 +18,27 @@ import javax.persistence.ManyToOne;
  * @author Conrad Letelier <Conrad@Letelier.email>
  */
 @Entity
-public class Player implements Serializable{
-    
-    @Id@GeneratedValue
-    int id;
-    String name;
-    
+public class Player implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private int id;
+    private String name;
+    private String imgURL;
+
     @ManyToOne
     @JsonManagedReference
     @JsonIgnore
     Team team;
-    
-    public Player(){
-        
+
+    public Player() {
+
     }
-    
-    public Player(int id, String name) {
+
+    public Player(int id, String name, String imgURL) {
         this.id = id;
         this.name = name;
+        this.imgURL = imgURL;
     }
 
     public int getId() {
@@ -50,19 +53,20 @@ public class Player implements Serializable{
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getImgURL() {
+        return imgURL;
     }
 
-    public Team getTeam() {
-        return team;
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setTeam(Team team) {
         this.team = team;
     }
-    
-    
-    
-    
+
 }

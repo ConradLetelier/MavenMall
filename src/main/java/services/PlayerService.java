@@ -9,35 +9,44 @@ import java.util.List;
 import models.Player;
 import models.Team;
 import repository.TeamRepo;
+import repository.TeamRepository;
 
 /**
  *
  * @author Conrad Letelier <Conrad@Letelier.email>
  */
 public class PlayerService {
+    TeamService teamService;
+    TeamRepository teamDB;
     
-    public List<Player> getPlayers(int teamId){
-        List<Team> teams = TeamRepo.getInstance().getTeams();
-        List<Player> players= null;
-        for(Team t : teams){
-            if(t.getId()==teamId){
-                players=t.getPlayers();
-            }
-        }
-        return players;
+    public PlayerService() {
+        teamService = new TeamService();
+        teamDB = new TeamRepository();
     }
     
-    public Player addPlayer(int teamId, Player player){
-        List<Team> teams = TeamRepo.getInstance().getTeams();
-        List<Player> players;
-        for(int i = 0; i < teams.size(); i++){
-            if(teams.get(i).getId()==teamId){
-                players = teams.get(i).getPlayers();
-                player.setId((players.size()+1));
-                teams.get(i).getPlayers().add(player);
-            }
-        }
-        return player;
+    public List<Player> getPlayers(int id) {
+        return teamDB.getTeam(id).getPlayers();
+    }
+
+    public void addPlayer(int teamId, Player player) {
+        Team teamToAddPlayerOn = teamDB.getTeam(teamId);
+        teamDB.addPlayer(teamToAddPlayerOn, player);
+    }
+    
+    public Player getPlayer(int playerId) {
+        return teamDB.getPlayer(playerId);
+    }
+
+    public void updatePlayer(int teamId, int playerId, Player player) {
+        Team teamToUpdatePlayerIn = teamDB.getTeam(teamId);
+        player.setId(playerId);
+        player.setTeam(teamToUpdatePlayerIn);
+        teamDB.updatePlayer(player);
+        
+    }
+
+    public void deletePlayer(int playerId) {
+        teamDB.deletePlayer(playerId);
     }
     
 }

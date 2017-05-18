@@ -7,6 +7,7 @@ package com.mycompany.mavenmall.resource;
 
 import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -47,8 +48,16 @@ public class TeamResource {
     }
     
     @PUT
-    public Team updateTeam(Team team){
+    @Path("/{teamId}")
+    public Team updateTeam(@PathParam("teamId")int id, Team team) {
+        team.setId(id);
         return teamservice.updateTeam(team);
+    }
+    
+    @DELETE
+    @Path("/{teamId}")
+    public void deleteTeam(@PathParam("teamId")int id) {
+        teamservice.removeTeam(id);
     }
    
     @Path("/{teamId}/players")

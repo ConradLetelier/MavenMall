@@ -21,13 +21,10 @@ public class TeamRepo {
     
     private TeamRepo(){
         teams=new ArrayList();
-        teams.add(new Team(1,"Barcelona"));
-        teams.add(new Team(2,"Malmö FF"));
-        teams.add(new Team(3,"Valencia"));
+ 
         
         List<Player> players1 = new ArrayList();
-        players1.add(new Player(1, "Messi"));
-        players1.add(new Player(2, "Xavi"));
+
         
         teams.get(0).setPlayers(players1);
     }
