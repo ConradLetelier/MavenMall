@@ -41,8 +41,8 @@ public class PlayerResource {
     }
 
     @POST
-    public void addPlayers(@PathParam("teamId") int teamId, Player player) {
-        playerService.addPlayer(teamId, player);
+    public Player addPlayers(@PathParam("teamId") int teamId, Player player) {
+        return playerService.addPlayer(teamId, player);
     }
 
     @PUT

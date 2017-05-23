@@ -59,13 +59,14 @@ public class TeamRepository {
         session.close();
     }
     
-    public void addPlayer(Team team, Player newPlayer) {
+    public Player addPlayer(Team team, Player newPlayer) {
         Session session = NewHibernateUtil.getSession();
         session.beginTransaction();
         newPlayer.setTeam(team);
         session.save(newPlayer);
         session.getTransaction().commit();
         session.close();
+        return newPlayer;
     }
     
     public Player getPlayer(int playerId) {

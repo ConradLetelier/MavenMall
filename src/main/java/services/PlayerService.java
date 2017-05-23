@@ -28,9 +28,9 @@ public class PlayerService {
         return teamDB.getTeam(id).getPlayers();
     }
 
-    public void addPlayer(int teamId, Player player) {
+    public Player addPlayer(int teamId, Player player) {
         Team teamToAddPlayerOn = teamDB.getTeam(teamId);
-        teamDB.addPlayer(teamToAddPlayerOn, player);
+        return teamDB.addPlayer(teamToAddPlayerOn, player);
     }
     
     public Player getPlayer(int playerId) {
